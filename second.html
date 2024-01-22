@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+</head>
+<body>
+    <input id="operand1" type="text" style="width: 100px;" placeholder="Operand 1">
+    <input id="operation" type="text" style="width: 100px;" placeholder="Operation (+, -, *, /)">
+    <input id="operand2" type="text" style="width: 100px;" placeholder="Operand 2">
+    <button type="button" onclick="calculate()">Calculate</button>
+    <div id="result" style="color: blue;"></div>
+    <div id="error" style="color: red;"></div>
+
+    <script>
+        function calculate() {
+            var operation = document.getElementById("operation").value;
+            var operand1 = document.getElementById("operand1").value;
+            var operand2 = document.getElementById("operand2").value;
+
+            var result_div = document.getElementById("result");
+            var error_div = document.getElementById("error");
+
+            error_div.innerHTML = ""; 
+            result_div.innerHTML = ""; 
+
+        
+            if (operand1 === "" || isNaN(operand1)) {
+                error_div.innerHTML = "Please enter a valid number for Operand 1";
+                return;
+            }
+
+            if (operand2 === "" || isNaN(operand2)) {
+                error_div.innerHTML = "Please enter a valid number for Operand 2";
+                return;
+            }
+
+            if (operation === "/" && operand2 === "0") {
+                error_div.innerHTML = "Division by zero is not allowed";
+                return;
+            }
+
+          
+            switch(operation) {
+                case "+":
+                    result_div.innerHTML = sum(Number(operand1), Number(operand2));
+                    break;
+                case "-":
+                    result_div.innerHTML = Number(operand1) - Number(operand2);
+                    break;
+                case "*":
+                    result_div.innerHTML = Number(operand1) * Number(operand2);
+                    break;
+                case "/":
+                    result_div.innerHTML = Number(operand1) / Number(operand2);
+                    break;
+                default:
+                    error_div.innerHTML = "Please enter a valid operation (+, -, *, /)";
+            }
+        }
+
+        function sum(num1, num2) {
+            return num1 + num2;
+        }
+    </script>
+</body>
+</html>
